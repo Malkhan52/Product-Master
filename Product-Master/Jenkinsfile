@@ -1,20 +1,23 @@
 pipeline {
   agent any
-  dir('Product-Master'){
-  	checkout scm
-  }
+  
   stages {	
+	  
 	stage('Maven Compile'){
 		steps{
 			echo 'Project compile stage'
-			bat label: 'Compilation running', script: '''mvn compile'''
+			bat label: 'Compilation running',
+			script: '''cd Product-Master
+			mvn compile'''
 	       	}
 	}
 	
 	stage('Unit Test') {
 	   steps {
 			echo 'Project Testing stage'
-			bat label: 'Test running', script: '''mvn test'''
+			bat label: 'Test running',
+			script: '''cd Product-Master
+			mvn test'''
 	       
        		}
    	}
@@ -27,7 +30,9 @@ pipeline {
        
        stage('SonarQube'){
 		steps{
-				bat label: '', script: '''mvn sonar:sonar \
+				bat label: '',
+				script: '''cd Product-Master
+				mvn sonar:sonar \
 				-Dsonar.host.url=http://localhost:9000 \
 				-Dsonar.login=cd14af6b8000f60b2cec24f32d6454c281881904'''
 			}
@@ -36,7 +41,9 @@ pipeline {
 	stage('Maven Package'){
 		steps{
 			echo 'Project packaging stage'
-			bat label: 'Project packaging', script: '''mvn package'''
+			bat label: 'Project packaging',
+			script: '''cd Product-Master
+			mvn package'''
 		}
 	} 		
     

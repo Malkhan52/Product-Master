@@ -38,7 +38,7 @@ public class SwaggerUiWebMvcConfigurer implements WebMvcConfigurer {
   @Override
   public void addCorsMappings(CorsRegistry registry) {
     registry
-        .addMapping("/ofd/v1")
+        .addMapping("/pm/products")
         .allowedOrigins("http://editor.swagger.io");
     registry
         .addMapping("/v2/api-docs.*")

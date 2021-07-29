@@ -34,13 +34,13 @@ public class ProductManagerController {
 			new Product(2109, "SneakerX","Woodland","xyz",2141,"Footwear")
 			);
 	
-//http://localhost:8081/pm/product/prod/1
+//http://localhost:8081/pm/products/prod/1
 	@ApiOperation(value = "Find product by id",
 			consumes = "product master Id",
 			produces = "Product object",
 			response = Product.class,
 			tags = "findProductById",
-			notes = "http://localhost:8081/pd/product/prod/{id}")
+			notes = "http://localhost:8081/pd/products/prod/{id}")
 	@GetMapping("/prod/{id}")
 	public ResponseEntity<Product> findProductById(@PathVariable("id") Integer id){
 		//Product product = new Product(1234, "Lenovo Ideapad","Lenovo","xyz",2341,"Electronics");
@@ -49,13 +49,13 @@ public class ProductManagerController {
 		return new ResponseEntity<>(product,HttpStatus.OK);		
 	}
 	
-	///http://localhost:8081/pm/product/prod/fetchall
+	///http://localhost:8081/pm/products/prod/fetchall
 		@ApiOperation(value = " ",
 				consumes = "",
 				produces = "All the products",
 				response = Product.class,
 				tags = "getAllProductsMaster",
-				notes = "http://localhost:8081/pd/product/prod/fetchall")
+				notes = "http://localhost:8081/pd/products/prod/fetchall")
 		@GetMapping("/prod/fetchall")
 		public ResponseEntity<List<Product>> getAllProducts(){
 			//Product product = new Product(1234, "Lenovo Ideapad","Lenovo","xyz",2341,"Electronics");
@@ -65,25 +65,25 @@ public class ProductManagerController {
 		}
 	
 	
-	// http://localhost:8081/pm/product/prod
+	// http://localhost:8081/pm/products/prod
 		@ApiOperation(value = "Add product to product master",
 				consumes = "Product object",
 				produces = "Product object",
 				tags = "AddProduct",
-				notes = "http://localhost:8081/pm/product/prod")
+				notes = "http://localhost:8081/pm/products/prod")
 		@PostMapping("/prod")
 		public ResponseEntity<Product> addProduct(@RequestBody Product product){
 			log.info("inside addProduct method of controller");
 			return new ResponseEntity<>(product,HttpStatus.OK);
 		}
 		
-		// http://localhost:8081/pm/product/prod
+		// http://localhost:8081/pm/products/prod
 		@ApiOperation(value = "Update order",
 				consumes = "Product object",
 				produces = "Product object",
 				response =Product.class,
 				tags = "updateProductMaster",
-				notes = "http://localhost:8081/pm/product/prod")
+				notes = "http://localhost:8081/pm/products/prod")
 		@PutMapping("/prod")
 		public ResponseEntity<Product> updateProduct(@RequestBody Product product){
 			log.info("inside update productmaster");
@@ -95,7 +95,7 @@ public class ProductManagerController {
 				produces = "Product Object",
 				response = Product.class,
 				tags="Delete the product",
-				notes ="http://localhost:8081/pm/product/prod")
+				notes ="http://localhost:8081/pm/products/prod")
 		@DeleteMapping("/prod/{id}")
 		public ResponseEntity<Product> deleteProduct(@PathVariable("id") Integer id){
 			log.info("inside deleteProduct from Product master");

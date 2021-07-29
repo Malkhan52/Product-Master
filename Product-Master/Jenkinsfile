@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  dir('Product-Master'){
+  	checkout scm
+  }
   stages {	
 	stage('Maven Compile'){
 		steps{

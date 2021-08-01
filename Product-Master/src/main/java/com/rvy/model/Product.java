@@ -1,4 +1,4 @@
-package com.sapient.trg.model;
+package com.rvy.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,12 +12,13 @@ import lombok.ToString;
 @Setter
 @ToString
 public class Product {
-  private Integer productMasterId;
-  private String productName;
-  private String productBrand;
-  private String productImage;
-  private Integer storeId;
-  private String productCategory;
+  private Integer product_master_id;
+  private String name;
+  private String category;
+  private String type;
+  private String brand;
+  private String image;
+//  private String productCategory;
   
   
 

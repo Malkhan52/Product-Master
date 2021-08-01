@@ -1,4 +1,4 @@
-package com.sapient.trg.app;
+package com.rvy.app;
 
 import static springfox.documentation.builders.PathSelectors.regex;
 
@@ -13,7 +13,7 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-@SpringBootApplication(scanBasePackages = "com.sapient")
+@SpringBootApplication(scanBasePackages = "com.rvy")
 
 @EnableOpenApi
 public class ProductMasterApplication {
@@ -32,7 +32,7 @@ public class ProductMasterApplication {
 	}
 
 	private Predicate<String> cmsPaths() {
-		return regex(".*/products/.*");
+		return regex(".*/pms/.*");
 	}
 
 }

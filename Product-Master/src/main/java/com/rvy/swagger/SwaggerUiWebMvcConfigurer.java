@@ -1,4 +1,4 @@
-package com.sapient.trg.swagger;
+package com.rvy.swagger;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -28,20 +28,20 @@ public class SwaggerUiWebMvcConfigurer implements WebMvcConfigurer {
         .resourceChain(false);
   }
 
-  //http://localhost:8081/pm/swagger-ui/index.html
+  //http://localhost:8081/rvy/api/swagger-ui/index.html
   @Override
   public void addViewControllers(ViewControllerRegistry registry) {
-    registry.addViewController(baseUrl + "/swagger-ui/")
+	registry.addViewController(baseUrl + "/swagger-ui/")
         .setViewName("forward:" + baseUrl + "/swagger-ui/index.html");
   }
 
   @Override
   public void addCorsMappings(CorsRegistry registry) {
     registry
-        .addMapping("/pm/products")
+        .addMapping("/rvy/api/v1")
         .allowedOrigins("http://editor.swagger.io");
     registry
-        .addMapping("/v2/api-docs.*")
+        .addMapping("/v1/api-docs.*")
         .allowedOrigins("http://editor.swagger.io");
    
   }

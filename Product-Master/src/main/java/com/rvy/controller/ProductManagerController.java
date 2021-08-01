@@ -1,4 +1,4 @@
-package com.sapient.trg.controller;
+package com.rvy.controller;
 
 
 import java.util.Arrays;
@@ -15,8 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
-import com.sapient.trg.model.Product;
+import com.rvy.model.Product;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,37 +25,37 @@ import lombok.extern.slf4j.Slf4j;
 @Api
 @Slf4j
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/pms/v1")
 public class ProductManagerController {
           List<Product> products = Arrays.asList(
-			new Product(1234, "Lenovo Ideapad","Lenovo","xyz",2341,"Electronics"),
-			new Product(1289, "T-shirt","H&M","abc",2381,"Clothing"),
-			new Product(2109, "SneakerX","Woodland","xyz",2141,"Footwear")
+			new Product(1234, "Lenovo Ideapad 330","Electronics","Laptop","Lenovo","image_link"),
+			new Product(1235, "t-shirts","Clothing","Full-sleeve","H&M","image_link"),
+			new Product(1236, "Lenovo Ideapad 320","Electronics","Laptop","Lenovo","image_link")
 			);
 	
-//http://localhost:8081/pm/products/prod/1
-	@ApiOperation(value = "Find product by id",
+//http://localhost:8081/rvy/api/pms/v1/product/1
+	@ApiOperation(value = "Product by id",
 			consumes = "product master Id",
 			produces = "Product object",
 			response = Product.class,
-			tags = "findProductById",
-			notes = "http://localhost:8081/pd/products/prod/{id}")
-	@GetMapping("/prod/{id}")
+			tags = "Find product by id",
+			notes = "http://localhost:8081/rvy/api/pms/v1/product/{id}")
+	@GetMapping("/product/{id}")
 	public ResponseEntity<Product> findProductById(@PathVariable("id") Integer id){
 		//Product product = new Product(1234, "Lenovo Ideapad","Lenovo","xyz",2341,"Electronics");
-		Product product = products.stream().filter((p)-> p.getProductMasterId().equals(id)).collect(Collectors.toList()).get(0);
+		Product product = products.stream().filter((p)-> p.getProduct_master_id().equals(id)).collect(Collectors.toList()).get(0);
 		log.info("inside findProductById method of controller");
 		return new ResponseEntity<>(product,HttpStatus.OK);		
 	}
 	
-	///http://localhost:8081/pm/products/prod/fetchall
-		@ApiOperation(value = " ",
+	///http://localhost:8081/rvy/api/pms/v1/products
+		@ApiOperation(value = "List of all products",
 				consumes = "",
 				produces = "All the products",
 				response = Product.class,
-				tags = "getAllProductsMaster",
-				notes = "http://localhost:8081/pd/products/prod/fetchall")
-		@GetMapping("/prod/fetchall")
+				tags = "Get All Products",
+				notes = "http://localhost:8081/rvy/api/pms/v1/products")
+		@GetMapping("/products")
 		public ResponseEntity<List<Product>> getAllProducts(){
 			//Product product = new Product(1234, "Lenovo Ideapad","Lenovo","xyz",2341,"Electronics");
 			//Product product = products.stream().filter((p)-> p.getProductMasterId().equals(id)).collect(Collectors.toList()).get(0);
@@ -65,41 +64,42 @@ public class ProductManagerController {
 		}
 	
 	
-	// http://localhost:8081/pm/products/prod
+	// http://localhost:8081/rvy/api/pms/v1/product
 		@ApiOperation(value = "Add product to product master",
 				consumes = "Product object",
 				produces = "Product object",
-				tags = "AddProduct",
-				notes = "http://localhost:8081/pm/products/prod")
-		@PostMapping("/prod")
+				tags = "Add Product",
+				notes = "http://localhost:8081/rvy/api/pms/v1/product")
+		@PostMapping("/product")
 		public ResponseEntity<Product> addProduct(@RequestBody Product product){
 			log.info("inside addProduct method of controller");
 			return new ResponseEntity<>(product,HttpStatus.OK);
 		}
 		
-		// http://localhost:8081/pm/products/prod
+		// http://localhost:8081/rvy/api/pms/v1/product
 		@ApiOperation(value = "Update order",
 				consumes = "Product object",
 				produces = "Product object",
 				response =Product.class,
-				tags = "updateProductMaster",
-				notes = "http://localhost:8081/pm/products/prod")
-		@PutMapping("/prod")
+				tags = "Update Product Master",
+				notes = "http://localhost:8081/rvy/api/pms/v1/product")
+		@PutMapping("/product")
 		public ResponseEntity<Product> updateProduct(@RequestBody Product product){
 			log.info("inside update productmaster");
 			return new ResponseEntity<>(product,HttpStatus.OK);
 		}
 		
+		// http://localhost:8081/rvy/api/pms/v1/product/1
 		@ApiOperation(value = "Delete",
 				consumes = "product Master Id",
 				produces = "Product Object",
 				response = Product.class,
-				tags="Delete the product",
-				notes ="http://localhost:8081/pm/products/prod")
-		@DeleteMapping("/prod/{id}")
+				tags="Delete A Product",
+				notes ="http://localhost:8081/rvy/api/pms/v1/product/{id}")
+		@DeleteMapping("/product/{id}")
 		public ResponseEntity<Product> deleteProduct(@PathVariable("id") Integer id){
 			log.info("inside deleteProduct from Product master");
-			Product product = products.stream().filter((p)-> p.getProductMasterId().equals(id)).collect(Collectors.toList()).get(0);
+			Product product = products.stream().filter((p)-> p.getProduct_master_id().equals(id)).collect(Collectors.toList()).get(0);
 			return new ResponseEntity<>(product,HttpStatus.OK);	
 		}
 		
